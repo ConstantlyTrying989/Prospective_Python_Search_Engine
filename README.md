@@ -87,7 +87,7 @@ python demo_search.py
 ## 📊 How It Works
 
 ### 1. Document Loading
-The system loads plain text documents from the Project Gutenberg corpus, currently indexing 7 classic novels (~7MB of text).
+The system loads plain text documents from Project Gutenberg, currently indexing 7 classic novels (~7MB of text).
 
 ### 2. Text Preprocessing
 - Converts text to lowercase

@@ -191,7 +191,7 @@ This project is open source and available under the MIT License.
 
 ## 👤 Author
 
-**Your Name**
+**Jason Lewis**
 - GitHub: [@ConstantlyTrying989](https://github.com/ConstantlyTrying989)
 - LinkedIn: [Jason Lewis](https://linkedin.com/in/jason-lewis-b3a188288)
 - Email: lewisjd2007@gmail.com

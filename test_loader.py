@@ -9,20 +9,17 @@ import os
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
-# DEBUG: Print paths
-print(f"Current working directory: {os.getcwd()}")
-print(f"Project root: {project_root}")
-print(f"__file__: {__file__}")
-print(f"Looking for data at: {os.path.join(project_root, 'data/raw_texts')}")
-print(f"Does it exist? {os.path.exists(os.path.join(project_root, 'data/raw_texts'))}")
-print()
-
 from src.loader import DocumentLoader
 
 
 def main():
-    # Initialize loader - USE CORRECT PATH (no ../)
-    loader = DocumentLoader('data/raw_texts')  # ← Changed from '../data/raw_texts'
+    print("="*70)
+    print("DOCUMENT LOADER TEST")
+    print("="*70)
+    print()
+    
+    # Initialize loader with relative path (loader.py will handle converting to absolute)
+    loader = DocumentLoader('data/raw_texts')
     
     # Load documents
     print("Loading documents...\n")
@@ -30,15 +27,20 @@ def main():
     try:
         documents = loader.load_documents()
     except Exception as e:
-        print(f"ERROR: {e}")
-        print("\nMake sure:")
-        print("1. You have .txt files in data/raw_texts folder")
-        print("2. You're running from project root")
+        print(f"❌ ERROR: {e}")
+        print("\nTroubleshooting:")
+        print("1. Make sure you have .txt files in data/raw_texts folder")
+        print("2. Check that the folder structure is:")
+        print("   Prospective_Python_Search_Engine/")
+        print("   ├── data/")
+        print("   │   └── raw_texts/")
+        print("   │       └── (your .txt files)")
+        print("   └── test_loader.py")
         return
     
-    print(f"\n{'='*60}")
-    print(f"Total documents loaded: {loader.get_document_count()}")
-    print(f"{'='*60}\n")
+    print(f"\n{'='*70}")
+    print(f"✅ Total documents loaded: {loader.get_document_count()}")
+    print(f"{'='*70}\n")
     
     # Show document info
     for i, doc in enumerate(documents, 1):
@@ -46,6 +48,10 @@ def main():
         print(f"   Characters: {len(doc['content']):,}")
         print(f"   Preview: {doc['content'][:100].strip()}...")
         print()
+    
+    print("="*70)
+    print("✅ Test completed successfully!")
+    print("="*70)
 
 
 if __name__ == '__main__':

@@ -19,35 +19,56 @@ def main():
     print()
     
     # Load and index documents
+    print("Loading documents...")
     loader = DocumentLoader('data/raw_texts')
-    documents = loader.load_documents()
+    
+    try:
+        documents = loader.load_documents()
+    except Exception as e:
+        print(f"❌ ERROR: {e}")
+        return
+    
+    print()
     
     engine = SearchEngine()
     engine.index_documents(documents)
     
     evaluator = SearchEvaluator()
     
+    # First, let's see what documents we have
+    print("="*70)
+    print("AVAILABLE DOCUMENTS:")
+    print("="*70)
+    for i, doc in enumerate(documents):
+        print(f"  {i}: {doc['title']}")
+    print()
+    
     # Define test cases with known relevant documents
-    # You'll need to manually identify which docs are relevant for each query
+    # NOTE: You'll need to adjust these indices based on YOUR actual documents!
+    # Run the script first to see which index corresponds to which book
     test_cases = [
         {
             'query': 'detective mystery crime',
-            'relevant_docs': {2},  # Adjust based on your doc order (e.g., Sherlock Holmes)
+            'relevant_docs': {0, 1, 2},  # Adjust these based on your actual documents
             'description': 'Detective/Mystery query'
         },
         {
             'query': 'whale ocean sea',
-            'relevant_docs': {3},  # Adjust based on your doc order (e.g., Moby Dick)
+            'relevant_docs': {0, 1},  # Adjust these based on your actual documents
             'description': 'Ocean/Whale query'
         },
         {
             'query': 'vampire blood night',
-            'relevant_docs': {1},  # Adjust based on your doc order (e.g., Dracula)
+            'relevant_docs': {0},  # Adjust these based on your actual documents
             'description': 'Vampire query'
         }
     ]
     
-    print("Running evaluation on test queries:")
+    print("="*70)
+    print("RUNNING EVALUATION ON TEST QUERIES:")
+    print("="*70)
+    print("\nNOTE: You may need to adjust 'relevant_docs' indices in the code")
+    print("      based on which books you have in data/raw_texts/\n")
     print("-"*70)
     
     for test in test_cases:
@@ -70,13 +91,22 @@ def main():
         print(f"  Recall@5: {recall_at_5:.3f}")
         print(f"  Average Precision: {avg_prec:.3f}")
         
-        print(f"\n  Top 3 results:")
-        for i, result in enumerate(results[:3], 1):
-            marker = "✓" if result['doc_index'] in relevant_docs else " "
+        print(f"\n  Top 5 results:")
+        for i, result in enumerate(results[:5], 1):
+            marker = "✅" if result['doc_index'] in relevant_docs else "  "
             print(f"    {marker} {i}. {result['title']} (score: {result['score']:.4f})")
     
     print("\n" + "="*70)
-    print("✓ Evaluation completed!")
+    print("METRIC EXPLANATION:")
+    print("="*70)
+    print("  • Precision@K: % of top K results that are relevant")
+    print("  • Recall@K: % of all relevant docs found in top K")
+    print("  • Average Precision: Quality of ranking (higher = better)")
+    
+    print("\n" + "="*70)
+    print("✅ Evaluation completed!")
+    print("="*70)
+    print("\nIMPORTANT: Edit this file to set correct 'relevant_docs' for your corpus!")
     print("="*70)
 
 

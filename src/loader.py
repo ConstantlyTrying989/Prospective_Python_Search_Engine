@@ -1,15 +1,3 @@
-import os
-"""
-def load_documents(path):
-    #Loads raw documents from disk.
-    documents = []
-    for filename in os.listdir(path):
-        if filename.endswith(".txt"):
-            with open(os.path.join(path, filename), encoding="utf-8") as f:
-                documents.append(f.read())
-    return documents
-"""
-
 """
 Document loader module for text search engine.
 Loads and manages text documents from local files.
@@ -27,9 +15,18 @@ class DocumentLoader:
         Initialize loader with data directory.
         
         Args:
-            data_dir: Path to directory containing text files
+            data_dir: Path to directory containing text files (can be relative or absolute)
         """
-        self.data_dir = data_dir
+        # Convert to absolute path to avoid issues with current working directory
+        if not os.path.isabs(data_dir):
+            # Get the directory where this script is located
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            # Go up one level to project root (since this is in src/)
+            project_root = os.path.dirname(script_dir)
+            # Combine with data_dir
+            data_dir = os.path.join(project_root, data_dir)
+        
+        self.data_dir = os.path.normpath(data_dir)
         self.documents: List[Dict[str, str]] = []
     
     def load_documents(self, encoding: str = 'utf-8') -> List[Dict[str, str]]:
@@ -56,7 +53,7 @@ class DocumentLoader:
         print(f"Found {len(txt_files)} text files")
         
         # Load each file
-        for filename in txt_files:
+        for filename in sorted(txt_files):  # Sort for consistent ordering
             filepath = os.path.join(self.data_dir, filename)
             
             try:
@@ -71,7 +68,7 @@ class DocumentLoader:
                 }
                 
                 documents.append(doc)
-                print(f"  Loaded: {doc['title']} ({len(content)} chars)")
+                print(f"  Loaded: {doc['title']} ({len(content):,} chars)")
                 
             except Exception as e:
                 print(f"  Error loading {filename}: {e}")

@@ -9,6 +9,14 @@ import os
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
+# DEBUG: Print paths
+print(f"Current working directory: {os.getcwd()}")
+print(f"Project root: {project_root}")
+print(f"__file__: {__file__}")
+print(f"Looking for data at: {os.path.join(project_root, 'data/raw_texts')}")
+print(f"Does it exist? {os.path.exists(os.path.join(project_root, 'data/raw_texts'))}")
+print()
+
 from src.loader import DocumentLoader
 
 

@@ -7,8 +7,8 @@ import os
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
-from src.loader import DocumentLoader
-from src.search import SearchEngine
+from loader import DocumentLoader
+from search import SearchEngine
 
 
 def main():

@@ -8,23 +8,26 @@ project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
 import numpy as np
-from loader import DocumentLoader
-from preprocessing import TextPreprocessor
-from vectorizer import TFIDFVectorizer
+from src.loader import DocumentLoader
+from src.preprocessing import TextPreprocessor
+from src.vectorizer import TFIDFVectorizer
 
 
 def main():
-    # Load and preprocess
-    loader = DocumentLoader('data/raw_texts')
-    documents = loader.load_documents()
+    loader = DocumentLoader('data/raw_texts')  # ← Relative to project root
+    
+    try:
+        documents = loader.load_documents()
+    except Exception as e:
+        print(f"ERROR: {e}")
+        return
+    
+    print(f"\nLoaded {len(documents)} documents\n")
     
     preprocessor = TextPreprocessor(use_stemming=True, remove_stopwords=True)
     all_contents = [doc['content'] for doc in documents]
     processed_docs = preprocessor.preprocess_documents(all_contents)
     
-    print(f"Loaded {len(documents)} documents\n")
-    
-    # Fit TF-IDF
     print("Building TF-IDF vectors...")
     vectorizer = TFIDFVectorizer()
     tfidf_matrix = vectorizer.fit_transform(processed_docs)
@@ -32,14 +35,9 @@ def main():
     print(f"\nTF-IDF matrix shape: {tfidf_matrix.shape}")
     print(f"(documents x vocabulary size)\n")
     
-    # Show top terms by TF-IDF for first document
     doc_idx = 0
     doc_vector = tfidf_matrix[doc_idx]
-    
-    # Get non-zero indices
     nonzero_indices = np.where(doc_vector > 0)[0]
-    
-    # Sort by TF-IDF score
     top_indices = nonzero_indices[np.argsort(-doc_vector[nonzero_indices])][:10]
     
     print(f"Top 10 terms in '{documents[doc_idx]['title']}':")

@@ -4,9 +4,9 @@ A from-scratch implementation of a document search engine using TF-IDF vectorisa
 
 ## Project Overview
 
-This search engine indexes classic literature from Project Gutenberg and enables searches across multiple documents. The system preprocesses text, builds TF-IDF representations, and ranks documents using cosine similarity.
+This search engine indexes classic literature and enables intelligent searches across multiple documents. The system preprocesses text, builds TF-IDF representations, and ranks documents using cosine similarity to deliver relevant results efficiently.
 
-**Important Features:**
+**Key Features:**
 - Custom TF-IDF vectoriser implementation from scratch
 - Configurable text preprocessing (stemming, stopword removal)
 - Cosine similarity ranking for document retrieval
@@ -32,7 +32,7 @@ python-text-search-engine/
 │   ├── search.py           # Search engine with cosine similarity
 │   └── evaluation.py       # Performance metrics
 ├── data/
-│   └── raw_texts/          # Project Gutenberg literature (7 books)
+│   └── raw_texts/          # Classic literature corpus
 ├── demo_search.py          # Interactive search interface
 ├── test_*.py               # Unit tests for each module
 └── requirements.txt
@@ -43,41 +43,41 @@ python-text-search-engine/
 ### Prerequisites
 
 - Python 3.9 or higher
-- Windows 10/11
 - Git
+- Windows/Linux/macOS compatible
 
-### Installation (Windows)
+### Installation
 
 1. **Clone the repository:**
-```cmd
+```bash
    git clone https://github.com/YourUsername/python-text-search-engine.git
    cd python-text-search-engine
 ```
 
 2. **Create virtual environment:**
-```cmd
+```bash
    python -m venv venv
-   venv\Scripts\activate.bat
+   source venv/bin/activate  # On Windows: venv\Scripts\activate.bat
 ```
 
 3. **Install dependencies:**
-```cmd
+```bash
    pip install -r requirements.txt
 ```
 
 4. **Download NLTK data (for the first run):**
-```cmd
+```bash
    python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
 ```
 
 ### Quick Start
 
 **Run the interactive search demo:**
-```cmd
+```bash
 python demo_search.py
 ```
 
-**Example questions to try:**
+**Example queries to try:**
 - `detective mystery crime`
 - `ocean whale adventure`
 - `love romance marriage`
@@ -85,18 +85,17 @@ python demo_search.py
 ## How It Works
 
 ### 1. Document Loading
-The system loads plain text documents from Project Gutenberg, currently indexing 7 classic novels (around 7MB of text).
+The system loads plain text documents, indexing a collection of classic novels.
 
 ### 2. Text Preprocessing
 - Converts text to lowercase
-- Removes URLs, emails, and numbers (if there are any in the texts)
+- Removes URLs, emails, and numbers
 - Tokenizes using NLTK's word_tokenize
 - Removes stopwords (common words like "and")
 - Applies Porter stemming to reduce words to root forms
 
 ### 3. TF-IDF Vectorization
-Implements Term Frequency-Inverse Document Frequency from scratch
-Term Dictionary:
+Implements Term Frequency-Inverse Document Frequency from scratch:
 - **TF (Term Frequency):** Normalized word frequency in document
 - **IDF (Inverse Document Frequency):** log(N / document_frequency)
 - Creates sparse vector representation for each document
@@ -116,7 +115,7 @@ Returns top K most similar documents ranked by score.
 ## Testing
 
 **Run all tests:**
-```cmd
+```bash
 python test_loader.py
 python test_preprocessing.py
 python test_vectorizer.py
@@ -133,16 +132,14 @@ python test_evaluation.py
 
 ## Performance
 
-**Literature Statistics:**
-- Documents indexed: 7 classic novels
-- Total tokens processed: ~316,000
-- Vocabulary size: ~18,500 unique terms
-- Average query time: <0.1 seconds
+The search engine efficiently processes queries across the indexed corpus:
+- Optimized TF-IDF computation
+- Quick document retrieval and ranking
+- Sub-second average query time
+- Scalable vector operations using NumPy
 
-**Sample Results (Query: "detective mystery crime"):**
-1. Adventures of Sherlock Holmes (Score: 0.4532)
-2. Tale of Two Cities (Score: 0.1234)
-3. Dracula (Score: 0.0876)
+**Sample Results:**
+Query-dependent results ranked by cosine similarity scores.
 
 ## Technical Highlights
 

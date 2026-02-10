@@ -1,50 +1,49 @@
 # Vector-Based Text Search Engine
 
-A from-scratch implementation of a document search engine using TF-IDF vectorization and cosine similarity. Built entirely in Python with no pre-built search libraries, demonstrating core information retrieval concepts.
+A from-scratch implementation of a document search engine using TF-IDF vectorisation and cosine similarity. Built entirely in Python programming language with no pre-built search libraries.
 
-## 🎯 Project Overview
+## Project Overview
 
-This search engine indexes classic literature from Project Gutenberg and enables semantic search across multiple documents. The system preprocesses text, builds TF-IDF representations, and ranks documents using cosine similarity.
+This search engine indexes classic literature from Project Gutenberg and enables searches across multiple documents. The system preprocesses text, builds TF-IDF representations, and ranks documents using cosine similarity.
 
-**Key Features:**
-- Custom TF-IDF vectorizer implementation from scratch
+**Important Features:**
+- Custom TF-IDF vectoriser implementation from scratch
 - Configurable text preprocessing (stemming, stopword removal)
 - Cosine similarity ranking for document retrieval
 - Evaluation metrics (Precision@K, Recall@K, Average Precision)
 - Interactive search interface
-- Clean, modular architecture
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Python 3.9+**
 - **NumPy** - Numerical computations and vector operations
 - **Pandas** - Data manipulation
-- **NLTK** - Tokenization and linguistic preprocessing
+- **NLTK** - Tokenisation and linguistic preprocessing
 - **Scikit-learn** - Validation and comparison benchmarks
 - **Matplotlib** - Evaluation visualizations
 
-## 📁 Project Structure
+## Project Structure
 ```
 python-text-search-engine/
 ├── src/
 │   ├── loader.py           # Document loading and management
-│   ├── preprocessing.py    # Text cleaning and tokenization
+│   ├── preprocessing.py    # Text cleaning and tokenisation
 │   ├── vectorizer.py       # TF-IDF implementation
 │   ├── search.py           # Search engine with cosine similarity
 │   └── evaluation.py       # Performance metrics
 ├── data/
-│   └── raw_texts/          # Project Gutenberg corpus (7 books)
+│   └── raw_texts/          # Project Gutenberg literature (7 books)
 ├── demo_search.py          # Interactive search interface
 ├── test_*.py               # Unit tests for each module
 └── requirements.txt
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
 - Python 3.9 or higher
-- Windows 10/11 (or macOS/Linux)
+- Windows 10/11
 - Git
 
 ### Installation (Windows)
@@ -66,7 +65,7 @@ python-text-search-engine/
    pip install -r requirements.txt
 ```
 
-4. **Download NLTK data (first run only):**
+4. **Download NLTK data (for the first run):**
 ```cmd
    python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
 ```
@@ -78,26 +77,26 @@ python-text-search-engine/
 python demo_search.py
 ```
 
-**Example queries to try:**
+**Example questions to try:**
 - `detective mystery crime`
 - `ocean whale adventure`
-- `vampire blood night`
 - `love romance marriage`
 
-## 📊 How It Works
+## How It Works
 
 ### 1. Document Loading
-The system loads plain text documents from Project Gutenberg, currently indexing 7 classic novels (~7MB of text).
+The system loads plain text documents from Project Gutenberg, currently indexing 7 classic novels (around 7MB of text).
 
 ### 2. Text Preprocessing
 - Converts text to lowercase
-- Removes URLs, emails, and numbers
+- Removes URLs, emails, and numbers (if there are any in the texts)
 - Tokenizes using NLTK's word_tokenize
-- Removes stopwords (common words like "the", "and")
+- Removes stopwords (common words like "and")
 - Applies Porter stemming to reduce words to root forms
 
 ### 3. TF-IDF Vectorization
-Implements Term Frequency-Inverse Document Frequency from scratch:
+Implements Term Frequency-Inverse Document Frequency from scratch
+Term Dictionary:
 - **TF (Term Frequency):** Normalized word frequency in document
 - **IDF (Inverse Document Frequency):** log(N / document_frequency)
 - Creates sparse vector representation for each document
@@ -114,7 +113,7 @@ Returns top K most similar documents ranked by score.
 - **Recall@K:** Coverage of relevant documents in top K
 - **Average Precision:** Overall ranking quality
 
-## 🧪 Testing
+## Testing
 
 **Run all tests:**
 ```cmd
@@ -132,9 +131,9 @@ python test_evaluation.py
 - Search result rankings
 - Evaluation metric scores
 
-## 📈 Performance
+## Performance
 
-**Corpus Statistics:**
+**Literature Statistics:**
 - Documents indexed: 7 classic novels
 - Total tokens processed: ~316,000
 - Vocabulary size: ~18,500 unique terms
@@ -145,58 +144,49 @@ python test_evaluation.py
 2. Tale of Two Cities (Score: 0.1234)
 3. Dracula (Score: 0.0876)
 
-## 🔍 Technical Highlights
+## Technical Highlights
 
 **Custom Implementation:**
-- No use of sklearn's TfidfVectorizer - built from scratch
+- No use of sklearn's TfidfVectorizer
 - Manual cosine similarity computation
-- Custom evaluation metrics
-
-**Code Quality:**
-- Type hints throughout
-- Comprehensive docstrings
-- Modular design with clear separation of concerns
-- Unit tests for all components
+- Custom evaluation metrics for testing
 
 **Algorithmic Complexity:**
 - Indexing: O(N × M) where N = documents, M = avg tokens
 - Query: O(V) where V = vocabulary size
 - Memory: O(N × V) for document-term matrix
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 This project demonstrates:
 - Information retrieval fundamentals (TF-IDF, cosine similarity)
 - Text preprocessing and NLP pipeline design
 - NumPy for efficient vector operations
-- Software engineering best practices (modularity, testing)
+- Software engineering best practices (testing)
 - Working with real-world text data
 
-## 📝 Future Enhancements
+## Future Enhancements
 
-- [ ] Add BM25 ranking algorithm
-- [ ] Implement query expansion with synonyms
+- [ ] Implement search for synonyms in the texts
 - [ ] Add phrase search support
-- [ ] Build web interface with Flask
-- [ ] Optimize with sparse matrices for larger corpora
 - [ ] Add relevance feedback mechanism
 
-## 🤝 Contributing
+## Contributing
 
 This is a portfolio project, but suggestions are welcome! Feel free to open an issue or submit a pull request.
 
-## 📄 License
+## License
 
 This project is open source and available under the MIT License.
 
-## 👤 Author
+## Author
 
 **Jason Lewis**
 - GitHub: [@ConstantlyTrying989](https://github.com/ConstantlyTrying989)
 - LinkedIn: [Jason Lewis](https://linkedin.com/in/jason-lewis-b3a188288)
 - Email: lewisjd2007@gmail.com
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Project Gutenberg for public domain texts
 - NLTK team for NLP tools
@@ -204,4 +194,3 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Built as part of internship application portfolio | 2026**

@@ -4,8 +4,8 @@ Search engine module with cosine similarity ranking.
 
 import numpy as np
 from typing import List, Dict, Tuple
-from preprocessing import TextPreprocessor
-from vectorizer import TFIDFVectorizer
+from src.preprocessing import TextPreprocessor
+from src.vectorizer import TFIDFVectorizer
 
 
 class SearchEngine:

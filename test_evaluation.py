@@ -11,7 +11,7 @@ from src.loader import DocumentLoader
 from src.search import SearchEngine
 from src.evaluation import SearchEvaluator
 
-
+#define test cases with known relevant documents
 def main():
     print("="*70)
     print("EVALUATION METRICS TEST")

@@ -50,7 +50,7 @@ python-text-search-engine/
 
 1. **Clone the repository:**
 ```bash
-   git clone https://github.com/YourUsername/python-text-search-engine.git
+   git clone https://github.com/ConstantlyTrying989/python-text-search-engine.git
    cd python-text-search-engine
 ```
 
